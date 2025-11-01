@@ -1,86 +1,99 @@
-# Formatar URLs Markdown
+# Conversor de Documentos para Markdown
 
-## Visão Geral
+## 📝 Descrição
+Este projeto é uma ferramenta de conversão de documentos para o formato Markdown, com interface gráfica web utilizando Streamlit. A aplicação permite converter diversos tipos de arquivos e URLs em documentos Markdown, além de oferecer integração com a plataforma StackSpot para publicação de conhecimento.
 
-Este projeto oferece uma interface baseada em Streamlit para converter diversos formatos de documentos e URLs em Markdown, gerenciar arquivos convertidos e integrar com a plataforma Knowledge Source (KS) da Stackspot. Suporta upload de arquivos, conversão de URLs e publicação de documentos na Stackspot, além de um chat simulado.
+## 🚀 Funcionalidades
 
----
+### Conversão de Arquivos
+- Suporte para múltiplos formatos de arquivo:
+  - CSV → Markdown
+  - TXT → Markdown
+  - DOCX → Markdown
+  - XLSX → Markdown
+  - PDF → Markdown
+- Conversão de URLs em documentos Markdown
+- Interface web intuitiva para upload de arquivos
+- Gerenciamento automático de pasta de saída
 
-## Estrutura de Diretórios
+### Integração StackSpot
+- Autenticação com serviços StackSpot
+- Criação e gerenciamento de Knowledge Sources
+- Publicação automática de arquivos convertidos
+- Limpeza de Knowledge Sources existentes
 
-- `interface.py`: Aplicação principal Streamlit, interface do usuário e orquestração do fluxo.
-- `converter_arquivos/`: Módulos para conversão de diferentes tipos de arquivos (CSV, DOCX, XLSX, PDF, TXT, URLs) para Markdown.
-- `exceptions/`: Classes de exceção personalizadas.
-- `properties/`: Utilitários para leitura de propriedades de configuração.
-- `stackspot/`: Integração com serviços da Stackspot (autenticação, criação de KS, publicação de arquivos).
-- `temp_file/`: Utilitários para gerenciamento e limpeza de arquivos temporários.
-- `pymock/`: Implementações mock para Stackspot e processamento de PDF (para testes/desenvolvimento).
-- `config.properties`: Arquivo de configuração.
-- `requirements.txt`: Dependências Python.
+## 🛠️ Tecnologias Utilizadas
 
----
+### Dependências Principais
+- Streamlit: Interface gráfica web
+- PyPDF2: Processamento de arquivos PDF
+- Pandas: Manipulação de dados tabulares
+- BeautifulSoup4: Parse de HTML
+- Requests: Requisições HTTP
+- Docx: Processamento de documentos Word
+- Openpyxl: Manipulação de planilhas Excel
+- Configparser: Gerenciamento de configurações
+- Jproperties: Leitura de arquivos .properties
 
-## Funcionalidades Principais
+## 📁 Estrutura do Projeto
 
-### 1. Upload e Conversão de Arquivos
+```
+├── converter_arquivos/           # Módulos de conversão de diferentes formatos
+│   ├── converter_arquivo_csv_md.py
+│   ├── converter_arquivo_docx_md.py
+│   ├── converter_arquivo_excel_md.py
+│   ├── converter_arquivo_pdf_md.py
+│   ├── converter_arquivo_txt_md.py
+│   └── converter_url_md.py
+├── exceptions/                   # Tratamento de exceções customizadas
+├── properties/                   # Gerenciamento de configurações
+├── stackspot/                    # Integração com StackSpot
+├── temp_file/                    # Gerenciamento de arquivos temporários
+├── interface.py                  # Interface principal Streamlit
+├── validacoes_url.py            # Validações de URLs
+└── config.properties            # Configurações do sistema
+```
 
-- Usuários podem fazer upload de arquivos (`csv`, `txt`, `docx`, `xlsx`, `pdf`).
-- Os arquivos são validados e convertidos para Markdown usando o conversor apropriado em `converter_arquivos/`.
-- Os arquivos convertidos são salvos em um diretório especificado pelo usuário.
-- Opção para limpar o diretório de saída antes de salvar novos arquivos.
+## 🚦 Como Usar
 
-### 2. Conversão de URL para Markdown
+1. **Preparação do Ambiente**
+   - Instale as dependências: `pip install -r requirements.txt`
+   - Configure o arquivo `config.properties` com suas credenciais
 
-- Usuários podem informar uma URL de documentação.
-- O conteúdo da URL é buscado e convertido para Markdown usando `converter_arquivos/converter_url_md.py`.
-- O resultado é salvo no diretório de saída.
+2. **Iniciar a Aplicação**
+   - Execute o comando: `streamlit run interface.py`
+   - Acesse a interface web no navegador
 
-### 3. Publicação no Knowledge Source da Stackspot
+3. **Conversão de Arquivos**
+   - Faça upload do arquivo desejado
+   - Selecione as opções de conversão
+   - O arquivo convertido será salvo na pasta de saída configurada
 
-- Usuários podem especificar o nome do KS (Knowledge Source).
-- A aplicação autentica na Stackspot, faz upload dos arquivos convertidos e publica no KS informado.
-- Utiliza módulos em `stackspot/` para autenticação, criação de KS e publicação.
+4. **Conversão de URLs**
+   - Cole a URL desejada no campo específico
+   - Clique em "Converter em markdown"
+   - O conteúdo será convertido automaticamente
 
-### 4. Chat com Stackspot (Simulado)
+5. **Integração StackSpot**
+   - Configure suas credenciais StackSpot
+   - Use as funcionalidades de publicação conforme necessário
 
-- Usuários podem enviar mensagens para um assistente simulado da Stackspot.
-- As mensagens são exibidas com timestamp na interface.
+## ⚙️ Configurações
 
----
+O arquivo `config.properties` permite configurar:
+- Caminhos de pasta de saída
+- Credenciais StackSpot
+- Configurações de conversão
 
-## Principais Módulos
+## 🤝 Contribuição
 
-- **`converter_arquivos/`**: Lógica para conversão de cada tipo de arquivo suportado para Markdown.
-- **`stackspot/`**: Autenticação, criação de KS e publicação de arquivos na Stackspot.
-- **`properties/`**: Leitura de valores de configuração do `config.properties`.
-- **`temp_file/`**: Funções para limpeza de diretórios temporários ou de saída.
+Para contribuir com o projeto:
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
 
----
+## 📄 Licença
 
-## Como Usar
-
-1. **Instale as dependências**:
-   `pip install -r requirements.txt`
-
-2. **Execute a aplicação**:
-   `streamlit run interface.py`
-
-3. **Siga a interface**:
-   - Faça upload de arquivos ou informe uma URL para converter em Markdown.
-   - Opcionalmente, publique os arquivos convertidos na Stackspot.
-   - Use o chat para interação simulada.
-
----
-
-## Configuração
-
-- Edite o arquivo `config.properties` para definir URLs da Stackspot e outras propriedades conforme necessário.
-
----
-
-## Observações
-
-- O chat é apenas uma simulação e não conecta a um assistente real.
-- Os módulos mock em `pymock/` são para desenvolvimento/testes e não devem ser usados em produção.
-
----
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
