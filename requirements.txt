@@ -1,0 +1,12 @@
+PyPDF2
+requests
+html2text
+streamlit
+bs4
+beautifulsoup4
+configparser
+pandas
+docx
+openpyxl
+tabulate
+jproperties
